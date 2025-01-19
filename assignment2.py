@@ -1,84 +1,38 @@
-# login the website, select product, add to cart, do check out by entering name address pincode.
+# select selenium and cucumber
+#  url = http://seleniumpractise.blogspot.com/
 
-
-from selenium import webdriver
 import time
+from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
 
 option = webdriver.ChromeOptions()
-driver = webdriver.Chrome(options=option)
+driver = webdriver.Chrome(options = option)
 driver.maximize_window()
-driver.get("https://www.saucedemo.com/")
+
+url = "http://seleniumpractise.blogspot.com/"
+
+# get url
+driver.get(url)
 
 time.sleep(3)
+# select dropdown
+dropdown1 = driver.find_element(By.ID, "tools")
+sel = Select(dropdown1)
 
-# login functionality
+dropdown2 = driver.find_element(By.ID, "tools1")
+sel2 = Select(dropdown2)
 
-username = driver.find_element(By.ID, "user-name")
-username.send_keys("performance_glitch_user")
+# select selenium from dropdown 1
+time.sleep(5)
+sel.select_by_value("Selenium")
+time.sleep(5)
+sel2.select_by_visible_text("Cucumber")
+time.sleep(5)
 
-password = driver.find_element(By.ID, "password")
-password.send_keys("secret_sauce")
-
+# trying index in 1 dropdown (additional)
+sel.select_by_index(2)
 time.sleep(2)
 
-login = driver.find_element(By.ID, "login-button")
-login.click()
+driver.close()
 
-time.sleep(1)
-# select items from page
-
-select_bag = driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack")
-select_bag.click()
-
-time.sleep(1)
-
-select_tshirt = driver.find_element(By.ID, "add-to-cart-test.allthethings()-t-shirt-(red)")
-select_tshirt.click()
-
-time.sleep(1)
-
-select_jacket = driver.find_element(By.ID, "add-to-cart-sauce-labs-fleece-jacket")
-select_jacket.click()
-
-time.sleep(1)
-
-# go to cart functionality
-
-cart = driver.find_element(By.XPATH, "//a[@class='shopping_cart_link']")
-cart.click()
-
-time.sleep(3)
-
-# checkout functionality
-
-checkout_click = driver.find_element(By.ID, "checkout")
-checkout_click.click()
-
-time.sleep(2)
-
-# enter checkout details
-
-firstname = driver.find_element(By.ID, "first-name")
-firstname.send_keys("Godzilla")
-
-time.sleep(1)
-
-lastname = driver.find_element(By.ID, "last-name")
-lastname.send_keys("Python")
-
-time.sleep(1)
-zip_code = driver.find_element(By.ID, "postal-code")
-zip_code.send_keys("110110")
-
-time.sleep(1)
-contnue_button = driver.find_element(By.ID, "continue")
-contnue_button.click()
-
-time.sleep(3)
-
-# click finish
-click_finish = driver.find_element(By.ID,"finish")
-click_finish.click()
-time.sleep(2)
-driver.quit()
